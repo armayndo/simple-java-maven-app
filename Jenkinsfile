@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Sonar') {
             steps {
-                sh "mvn sonar:sonar -Dsonar.host.url=http://192.168.56.56:9000 -Dsonar.login=07028c9c828ba62dbd90aa653ddd82eeb7f07062"
+                sh "mvn sonar:sonar -Dsonar.host.url=http://ec2-3-1-213-201.ap-southeast-1.compute.amazonaws.com:9000 -Dsonar.login=d0dfd1b82e1b00886fd7b3c88ba6ddd8b35fbb7c"
             }
         }
     }
