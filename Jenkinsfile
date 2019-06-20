@@ -1,17 +1,17 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
-        }
-    }
+    agent any
     options {
         skipStagesAfterUnstable()
     }
     stages {
+        stage('Cloning Git') {
+          steps {
+            git branch: 'JenkinsfileSCM', url: 'https://github.com/armayndo/simple-java-maven-app.git'
+          }
+        }
         stage('Build') { 
             steps {
-                sh 'mvn -B -DskipTests clean package' 
+                sh 'mvn clean package' 
             }
         }
         stage('Test') {
@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Sonar') {
             steps {
-                sh "mvn sonar:sonar -Dsonar.host.url=http://ec2-3-1-213-201.ap-southeast-1.compute.amazonaws.com:9000 -Dsonar.login=d0dfd1b82e1b00886fd7b3c88ba6ddd8b35fbb7c"
+                sh "mvn sonar:sonar -Dsonar.host.url=http://3.0.182.171:9000 -Dsonar.login=a9a03939d6d6709b03840aeb8dcf9a9f90dfdd65"
             }
         }
     }
