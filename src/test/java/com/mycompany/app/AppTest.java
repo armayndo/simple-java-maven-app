@@ -29,7 +29,7 @@ public class AppTest
         }
     }
 
-    //@Test
+    @Test
     public void testAppMain()
     {
         App.main(null);
