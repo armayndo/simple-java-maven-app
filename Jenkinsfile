@@ -9,6 +9,16 @@ pipeline {
             git branch: 'JenkinsfileSCM', url: 'https://github.com/armayndo/simple-java-maven-app.git'
           }
         }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
         stage('Build and sonar analysis') { 
             steps {
                 withSonarQubeEnv('SonarQube') {
@@ -23,16 +33,6 @@ pipeline {
               }
             }
           }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
