@@ -20,7 +20,7 @@ public class AppTest
         System.setOut(new PrintStream(outContent));
     }
 
-    //@Test
+    @Test
     public void testAppConstructor() {
         try {
             new App();
@@ -29,7 +29,7 @@ public class AppTest
         }
     }
 
-    @Test
+    //@Test
     public void testAppMain()
     {
         App.main(null);
